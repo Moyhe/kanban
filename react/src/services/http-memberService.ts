@@ -1,34 +1,30 @@
-import apiClient from "./api-client";
+import axiosInstance from "./api-client";
 
 interface Entity {
     id: number;
 }
 
 class HttpService {
-    endpoint: string;
+    private endpoint: string;
 
     constructor(endpoint: string) {
         this.endpoint = endpoint;
     }
 
     getAll<T>() {
-        const controller = new AbortController();
-        const request = apiClient.get<T[]>(this.endpoint, {
-            signal: controller.signal,
-        });
-        return { request, cancel: () => controller.abort() };
+        return axiosInstance.get<T>(this.endpoint);
     }
 
     delete(id: number) {
-        return apiClient.delete(this.endpoint + "/" + id);
+        return axiosInstance.delete(this.endpoint + "/" + id);
     }
 
     create<T>(entity: T) {
-        return apiClient.post(this.endpoint, entity);
+        return axiosInstance.post(this.endpoint, entity);
     }
 
     update<T extends Entity>(entity: T) {
-        return apiClient.patch(this.endpoint + "/" + entity.id, entity);
+        return axiosInstance.patch(this.endpoint + "/" + entity.id, entity);
     }
 }
 

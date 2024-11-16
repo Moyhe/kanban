@@ -24,7 +24,7 @@ class StoreMemeberRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'title' => ['required', 'string'],
-            'age' => ['required', 'integer'],
+            'age' => ['required', 'integer', 'min:0', 'max:100'],
             'email' => ['required', 'email'],
             'mobile_number' => ['required', 'string', 'regex:/^\+?[1-9]\d{1,14}$/']
         ];

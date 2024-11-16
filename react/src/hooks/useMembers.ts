@@ -16,7 +16,7 @@ const useMembers = () => {
                 const members = data;
                 setMembers(members.data);
             })
-            .catch((err: Error) => {
+            .catch((err) => {
                 if (err instanceof CanceledError) return;
                 setError(err.message);
             });

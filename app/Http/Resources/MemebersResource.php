@@ -2,11 +2,13 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class MemebersResource extends JsonResource
 {
+    public static $wrap = false;
     /**
      * Transform the resource into an array.
      *
@@ -20,7 +22,8 @@ class MemebersResource extends JsonResource
             'title' => $this->title,
             'age' => $this->age,
             'email' => $this->email,
-            'mobile_number' => $this->mobile_number
+            'mobile_number' => $this->mobile_number,
+            'created_at' => (new Carbon($this->created_at))->format('Y-m-d'),
         ];
     }
 }

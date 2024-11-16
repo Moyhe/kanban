@@ -25,7 +25,7 @@ class UpdateMemeberRequest extends FormRequest
             'name' => ['required', 'string'],
             'title' => ['required', 'string'],
             'age' => ['required', 'integer'],
-            'email' => ['required', 'email', 'unique:members,email'],
+            'email' => ['required', 'email'],
             'mobile_number' => ['required', 'string', 'regex:/^\+?[1-9]\d{1,14}$/']
         ];
     }

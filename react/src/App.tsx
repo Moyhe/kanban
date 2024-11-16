@@ -1,8 +1,14 @@
+import { Outlet } from "react-router-dom";
+import Home from "./Pages/Home";
+
 function App() {
     return (
-        <div className="flex justify-center items-center min-h-screen">
-            hell world
-        </div>
+        <>
+            <main>
+                <Home />
+            </main>
+            <Outlet />
+        </>
     );
 }
 

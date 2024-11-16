@@ -30,7 +30,7 @@ class MemeberController extends Controller
     {
         Memeber::create($request->validated());
 
-        return response()->json(['success' => 'question created successfullu']);
+        return response()->json(['success' => 'memeber created successfull']);
     }
 
     /**

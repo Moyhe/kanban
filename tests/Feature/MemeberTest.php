@@ -23,14 +23,12 @@ it('can show a member', function () {
     $response->assertStatus(200);
 
     $response->assertJson([
-        'data' => [
-            'id' => $member->id,
-            'name' => $member->name,
-            'email' => $member->email,
-            'mobile_number' => $member->mobile_number,
-            'age' => $member->age,
-            'title' => $member->title,
-        ],
+        'id' => $member->id,
+        'name' => $member->name,
+        'email' => $member->email,
+        'mobile_number' => $member->mobile_number,
+        'age' => $member->age,
+        'title' => $member->title,
     ]);
 });
 

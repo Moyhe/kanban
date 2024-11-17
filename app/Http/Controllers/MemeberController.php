@@ -335,6 +335,6 @@ class MemeberController extends Controller
 
         $member->delete();
 
-        return response('', 204);
+        return response('', 201);
     }
 }

@@ -9,52 +9,133 @@ use App\Models\Memeber;
 use App\Traits\ModelNotFoundException;
 
 
-/**
- * @OA\Info(title="Member Management API", version="1.0")
- * @OA\Tag(name="Members", description="API Endpoints for Managing Members")
- */
 class MemeberController extends Controller
 {
-
     use ModelNotFoundException;
+
     /**
+     *
      * @OA\Get(
-     *     path="/api/members",
-     *     tags={"Members"},
-     *     summary="Get a list of members",
-     *     description="Returns a paginated list of members",
+     *     path="/api/members/",
+     *     tags={"members"},
+     *     summary="List members",
+     *     operationId="list_members",
+     *     description="Returns a list members",
      *     @OA\Response(
      *         response=200,
-     *         description="A list of members",
-     *         @OA\JsonContent(
-     *             type="object",
-     *             @OA\Property(property="data", type="array", @OA\Items(ref="#/components/schemas/Memeber")),
-     *             @OA\Property(property="links", type="object"),
-     *             @OA\Property(property="meta", type="object")
+     *         description="List of members",
+     *
+     *           @OA\JsonContent(
+     *              @OA\Property(
+     *                  property="name",
+     *                  description="member Name",
+     *                  type="string",
+     *                  nullable="false",
+     *                  example="...."
+     *              ),
+     *              @OA\Property(
+     *                  property="title",
+     *                  description="member title",
+     *                  type="string",
+     *                  nullable="false",
+     *                  example="...."
+     *              ),
+     *              @OA\Property(
+     *                  property="age",
+     *                  description="Memeber Age",
+     *                  type="number",
+     *                  nullable="false",
+     *                  example="1"
+     *              ),
+     *
+     *                  @OA\Property(
+     *                  property="email",
+     *                  description="Memeber email",
+     *                  type="email",
+     *                  nullable="false",
+     *                  example="geni@gmail.com"
+     *              ),
+     *
+     *               @OA\Property(
+     *                  property="phone numner",
+     *                  description="Memeber phone number",
+     *                  type="number",
+     *                  nullable="false",
+     *                  example="geni@gmail.com"
+     *              ),
      *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
      *     )
      * )
      */
-
     public function index()
     {
         return MemebersResource::collection(Memeber::query()->paginate(10));
     }
 
+
     /**
+     * @OA\Schema(
+     *    schema="StoreRequest",
+     *              @OA\Property(
+     *                  property="name",
+     *                  description="member Name",
+     *                  type="string",
+     *                  nullable="false",
+     *                  example="...."
+     *              ),
+     *              @OA\Property(
+     *                  property="title",
+     *                  description="member title",
+     *                  type="string",
+     *                  nullable="false",
+     *                  example="...."
+     *              ),
+     *              @OA\Property(
+     *                  property="age",
+     *                  description="Memeber Age",
+     *                  type="number",
+     *                  nullable="false",
+     *                  example="1"
+     *              ),
+     *
+     *                  @OA\Property(
+     *                  property="email",
+     *                  description="Memeber email",
+     *                  type="email",
+     *                  nullable="false",
+     *                  example="geni@gmail.com"
+     *              ),
+     *
+     *               @OA\Property(
+     *                  property="phone numner",
+     *                  description="Memeber phone number",
+     *                  type="number",
+     *                  nullable="false",
+     *                  example="geni@gmail.com"
+     *              ),
+     * )
+     *
      * @OA\Post(
      *     path="/api/members",
-     *     tags={"Members"},
-     *     summary="Create a new member",
-     *     description="Creates a new member",
+     *     tags={"members"},
+     *     summary="create a member",
+     *     description="crate a member ",
+     *     operationId="store",
      *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/StoreMemeberRequest")
+     *        @OA\JsonContent(ref="#/components/schemas/StoreRequest")
      *     ),
      *     @OA\Response(
-     *         response=201,
-     *         description="Member created successfully",
-     *         @OA\JsonContent(ref="#/components/schemas/Memeber")
+     *         response=200,
+     *         description="Authentication successful",
+
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
      *     )
      * )
      */
@@ -66,22 +147,67 @@ class MemeberController extends Controller
     }
 
     /**
+     *
      * @OA\Get(
-     *     path="/api/members/{id}",
-     *     tags={"Members"},
-     *     summary="Get a member",
-     *     description="Returns a specific member by ID",
-     *     @OA\Parameter(
-     *         name="id",
+     *     path="/api/members/{member}",
+     *     tags={"members"},
+     *     summary="List one member",
+     *     operationId="list_one_member",
+     *      @OA\Parameter(
+     *         name="member",
+     *         description="member ID",
      *         in="path",
-     *         description="ID of the member",
      *         required=true,
-     *         @OA\Schema(type="integer")
+     *         example="1"
      *     ),
+     *     description="Returns one note",
      *     @OA\Response(
      *         response=200,
-     *         description="Member details",
-     *         @OA\JsonContent(ref="#/components/schemas/Memeber")
+     *         description="list on note",
+     *
+     *           @OA\JsonContent(
+     *              @OA\Property(
+     *                  property="name",
+     *                  description="member Name",
+     *                  type="string",
+     *                  nullable="false",
+     *                  example="...."
+     *              ),
+     *              @OA\Property(
+     *                  property="title",
+     *                  description="member title",
+     *                  type="string",
+     *                  nullable="false",
+     *                  example="...."
+     *              ),
+     *              @OA\Property(
+     *                  property="age",
+     *                  description="Memeber Age",
+     *                  type="number",
+     *                  nullable="false",
+     *                  example="1"
+     *              ),
+     *
+     *                  @OA\Property(
+     *                  property="email",
+     *                  description="Memeber email",
+     *                  type="email",
+     *                  nullable="false",
+     *                  example="geni@gmail.com"
+     *              ),
+     *
+     *               @OA\Property(
+     *                  property="phone numner",
+     *                  description="Memeber phone number",
+     *                  type="number",
+     *                  nullable="false",
+     *                  example="geni@gmail.com"
+     *              ),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
      *     )
      * )
      */
@@ -93,26 +219,71 @@ class MemeberController extends Controller
     }
 
     /**
+     * @OA\Schema(
+     *    schema="UpdateRequest",
+     *              @OA\Property(
+     *                  property="name",
+     *                  description="member Name",
+     *                  type="string",
+     *                  nullable="false",
+     *                  example="...."
+     *              ),
+     *              @OA\Property(
+     *                  property="title",
+     *                  description="member title",
+     *                  type="string",
+     *                  nullable="false",
+     *                  example="...."
+     *              ),
+     *              @OA\Property(
+     *                  property="age",
+     *                  description="Memeber Age",
+     *                  type="number",
+     *                  nullable="false",
+     *                  example="1"
+     *              ),
+     *
+     *                  @OA\Property(
+     *                  property="email",
+     *                  description="Memeber email",
+     *                  type="email",
+     *                  nullable="false",
+     *                  example="geni@gmail.com"
+     *              ),
+     *
+     *               @OA\Property(
+     *                  property="phone numner",
+     *                  description="Memeber phone number",
+     *                  type="number",
+     *                  nullable="false",
+     *                  example="geni@gmail.com"
+     *              ),
+     * )
+     *
      * @OA\Put(
-     *     path="/api/members/{id}",
-     *     tags={"Members"},
-     *     summary="Update a member",
-     *     description="Updates an existing member",
+     *     path="/api/members/{member}",
+     *     tags={"members"},
+     *     summary="upate a member",
+     *     description="update a member ",
+     *     operationId="update_member",
      *     @OA\Parameter(
-     *         name="id",
+     *         name="member",
+     *         description="member ID",
      *         in="path",
-     *         description="ID of the member",
      *         required=true,
-     *         @OA\Schema(type="integer")
+     *         example="1"
      *     ),
      *     @OA\RequestBody(
-     *         required=true,
-     *         @OA\JsonContent(ref="#/components/schemas/UpdateMemeberRequest")
+     *        @OA\JsonContent(ref="#/components/schemas/UpdateRequest")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Member updated successfully",
-     *         @OA\JsonContent(ref="#/components/schemas/Memeber")
+     *         description="Authentication successful",
+
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
      *     )
      * )
      */
@@ -125,22 +296,36 @@ class MemeberController extends Controller
         return new MemebersResource($member);
     }
 
+
     /**
+     * @OA\Schema(
+     *    schema="DeleteRequest",
+     * )
+     *
      * @OA\Delete(
-     *     path="/api/members/{id}",
-     *     tags={"Members"},
-     *     summary="Delete a member",
-     *     description="Deletes a member by ID",
+     *     path="/api/members/{member}",
+     *     tags={"members"},
+     *     summary="delete a member",
+     *     description="Delete a member ",
+     *     operationId="Delete_member",
      *     @OA\Parameter(
-     *         name="id",
+     *         name="member",
+     *         description="member ID",
      *         in="path",
-     *         description="ID of the member",
      *         required=true,
-     *         @OA\Schema(type="integer")
+     *         example="1"
+     *     ),
+     *     @OA\RequestBody(
+     *        @OA\JsonContent(ref="#/components/schemas/DeleteRequest")
      *     ),
      *     @OA\Response(
-     *         response=204,
-     *         description="Member deleted successfully"
+     *         response=200,
+     *         description="Authentication successful",
+
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Internal server error"
      *     )
      * )
      */
@@ -150,6 +335,6 @@ class MemeberController extends Controller
 
         $member->delete();
 
-        return response('', 201);
+        return response('', 204);
     }
 }

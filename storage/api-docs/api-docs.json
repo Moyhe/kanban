@@ -1,0 +1,309 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Member registration API",
+        "description": "This is an example API for Member Management",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/members/": {
+            "get": {
+                "tags": [
+                    "members"
+                ],
+                "summary": "List members",
+                "description": "Returns a list members",
+                "operationId": "list_members",
+                "responses": {
+                    "200": {
+                        "description": "List of members",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "description": "member Name",
+                                            "type": "string",
+                                            "example": "....",
+                                            "nullable": "false"
+                                        },
+                                        "title": {
+                                            "description": "member title",
+                                            "type": "string",
+                                            "example": "....",
+                                            "nullable": "false"
+                                        },
+                                        "age": {
+                                            "description": "Memeber Age",
+                                            "type": "number",
+                                            "example": "1",
+                                            "nullable": "false"
+                                        },
+                                        "email": {
+                                            "description": "Memeber email",
+                                            "type": "email",
+                                            "example": "geni@gmail.com",
+                                            "nullable": "false"
+                                        },
+                                        "phone numner": {
+                                            "description": "Memeber phone number",
+                                            "type": "number",
+                                            "example": "geni@gmail.com",
+                                            "nullable": "false"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/members": {
+            "post": {
+                "tags": [
+                    "members"
+                ],
+                "summary": "create a member",
+                "description": "crate a member ",
+                "operationId": "store",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/StoreRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Authentication successful"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/api/members/{member}": {
+            "get": {
+                "tags": [
+                    "members"
+                ],
+                "summary": "List one member",
+                "description": "Returns one note",
+                "operationId": "list_one_member",
+                "parameters": [
+                    {
+                        "name": "member",
+                        "in": "path",
+                        "description": "member ID",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "list on note",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "description": "member Name",
+                                            "type": "string",
+                                            "example": "....",
+                                            "nullable": "false"
+                                        },
+                                        "title": {
+                                            "description": "member title",
+                                            "type": "string",
+                                            "example": "....",
+                                            "nullable": "false"
+                                        },
+                                        "age": {
+                                            "description": "Memeber Age",
+                                            "type": "number",
+                                            "example": "1",
+                                            "nullable": "false"
+                                        },
+                                        "email": {
+                                            "description": "Memeber email",
+                                            "type": "email",
+                                            "example": "geni@gmail.com",
+                                            "nullable": "false"
+                                        },
+                                        "phone numner": {
+                                            "description": "Memeber phone number",
+                                            "type": "number",
+                                            "example": "geni@gmail.com",
+                                            "nullable": "false"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "members"
+                ],
+                "summary": "upate a member",
+                "description": "update a member ",
+                "operationId": "update_member",
+                "parameters": [
+                    {
+                        "name": "member",
+                        "in": "path",
+                        "description": "member ID",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Authentication successful"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "members"
+                ],
+                "summary": "delete a member",
+                "description": "Delete a member ",
+                "operationId": "Delete_member",
+                "parameters": [
+                    {
+                        "name": "member",
+                        "in": "path",
+                        "description": "member ID",
+                        "required": true,
+                        "example": "1"
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeleteRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Authentication successful"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "StoreRequest": {
+                "properties": {
+                    "name": {
+                        "description": "member Name",
+                        "type": "string",
+                        "example": "....",
+                        "nullable": "false"
+                    },
+                    "title": {
+                        "description": "member title",
+                        "type": "string",
+                        "example": "....",
+                        "nullable": "false"
+                    },
+                    "age": {
+                        "description": "Memeber Age",
+                        "type": "number",
+                        "example": "1",
+                        "nullable": "false"
+                    },
+                    "email": {
+                        "description": "Memeber email",
+                        "type": "email",
+                        "example": "geni@gmail.com",
+                        "nullable": "false"
+                    },
+                    "phone numner": {
+                        "description": "Memeber phone number",
+                        "type": "number",
+                        "example": "geni@gmail.com",
+                        "nullable": "false"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateRequest": {
+                "properties": {
+                    "name": {
+                        "description": "member Name",
+                        "type": "string",
+                        "example": "....",
+                        "nullable": "false"
+                    },
+                    "title": {
+                        "description": "member title",
+                        "type": "string",
+                        "example": "....",
+                        "nullable": "false"
+                    },
+                    "age": {
+                        "description": "Memeber Age",
+                        "type": "number",
+                        "example": "1",
+                        "nullable": "false"
+                    },
+                    "email": {
+                        "description": "Memeber email",
+                        "type": "email",
+                        "example": "geni@gmail.com",
+                        "nullable": "false"
+                    },
+                    "phone numner": {
+                        "description": "Memeber phone number",
+                        "type": "number",
+                        "example": "geni@gmail.com",
+                        "nullable": "false"
+                    }
+                },
+                "type": "object"
+            },
+            "DeleteRequest": {}
+        }
+    },
+    "tags": [
+        {
+            "name": "members",
+            "description": "members"
+        }
+    ]
+}

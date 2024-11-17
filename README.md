@@ -28,6 +28,10 @@
 
     php artisan serve
 
+7.to run the test
+
+    php artisan test
+
 7.go to react folder and run
 
     npm run dev
